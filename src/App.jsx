@@ -23,9 +23,19 @@ export function App () {
     setImageUrl(CAT_ENDPOINT_IMAGE)
   }, [fact])
 
+  const handleClick = () => {
+    fetch(CAT_ENDPOINT_RANDOM_FACT)
+      .then((response) => response.json())
+      .then((data) => {
+        const { fact } = data
+        setFact(fact)
+      })
+  }
+
   return (
     <main>
       <h1>Random Facts de gatos</h1>
+      <button onClick={handleClick}>Get new fact</button>
       {fact && <p>{fact}</p>}
       {imageUrl && <img src={imageUrl} alt={`Image extracted using the first word of ${fact}`} />}
     </main>
